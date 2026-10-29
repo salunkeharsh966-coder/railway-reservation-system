@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "cd railway-reservation-backend && mvn -B clean package -DskipTests"
+  },
+  "deploy": {
+    "startCommand": "java -jar railway-reservation-backend/target/railway-reservation-backend-1.0.0.jar --server.port=$PORT",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 5
+  }
+}

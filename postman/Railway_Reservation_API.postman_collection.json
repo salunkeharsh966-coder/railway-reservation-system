@@ -1,0 +1,254 @@
+{
+  "info": {
+    "name": "Railway Reservation and Train Management System",
+    "description": "REST API collection for the RailYatra full-stack project. Run the requests in order: register/login, search, book, pay, view, cancel, admin.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/api" },
+    { "key": "userId", "value": "2" },
+    { "key": "trainId", "value": "1" },
+    { "key": "bookingId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"test123\",\n  \"phone\": \"9800000009\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"rahul@example.com\",\n  \"password\": \"rahul123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/auth/profile/{{userId}}", "host": ["{{baseUrl}}"], "path": ["auth", "profile", "{{userId}}"] }
+          }
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/profile/{{userId}}", "host": ["{{baseUrl}}"], "path": ["auth", "profile", "{{userId}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rahul Sharma\",\n  \"email\": \"rahul@example.com\",\n  \"phone\": \"9800000002\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trains",
+      "item": [
+        {
+          "name": "List All Trains",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trains", "host": ["{{baseUrl}}"], "path": ["trains"] }
+          }
+        },
+        {
+          "name": "Search Trains",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/trains/search?source=Mumbai&destination=Pune",
+              "host": ["{{baseUrl}}"],
+              "path": ["trains", "search"],
+              "query": [
+                { "key": "source", "value": "Mumbai" },
+                { "key": "destination", "value": "Pune" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Train Details",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trains/{{trainId}}", "host": ["{{baseUrl}}"], "path": ["trains", "{{trainId}}"] }
+          }
+        },
+        {
+          "name": "Stations",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trains/stations", "host": ["{{baseUrl}}"], "path": ["trains", "stations"] }
+          }
+        },
+        {
+          "name": "Add Train (admin)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/trains", "host": ["{{baseUrl}}"], "path": ["trains"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trainNumber\": \"99999\",\n  \"trainName\": \"Test Express\",\n  \"source\": \"TestA\",\n  \"destination\": \"TestB\",\n  \"departureTime\": \"10:00\",\n  \"arrivalTime\": \"14:00\",\n  \"distance\": 300,\n  \"trainType\": \"Express\",\n  \"availableSeats\": 50,\n  \"fareSleeper\": 300,\n  \"fareAc3\": 800,\n  \"fareAc2\": 1100,\n  \"fareAc1\": 1800,\n  \"fareCc\": 500\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Train (admin)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/trains/{{trainId}}", "host": ["{{baseUrl}}"], "path": ["trains", "{{trainId}}"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"trainNumber\": \"12123\",\n  \"trainName\": \"Deccan Express\",\n  \"source\": \"Mumbai\",\n  \"destination\": \"Pune\",\n  \"departureTime\": \"06:40\",\n  \"arrivalTime\": \"10:05\",\n  \"distance\": 192,\n  \"trainType\": \"Express\",\n  \"availableSeats\": 120,\n  \"fareSleeper\": 245,\n  \"fareAc3\": 620,\n  \"fareAc2\": 880,\n  \"fareAc1\": 1480,\n  \"fareCc\": 410\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Train (admin)",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/trains/{{trainId}}", "host": ["{{baseUrl}}"], "path": ["trains", "{{trainId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/bookings", "host": ["{{baseUrl}}"], "path": ["bookings"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 2,\n  \"trainId\": 1,\n  \"journeyDate\": \"2026-12-01\",\n  \"classType\": \"SLEEPER\",\n  \"passengers\": [\n    { \"name\": \"Rahul Sharma\", \"age\": 34, \"gender\": \"Male\", \"seatPreference\": \"Lower\" }\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "My Bookings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/bookings/my?userId={{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", "my"],
+              "query": [{ "key": "userId", "value": "{{userId}}" }]
+            }
+          }
+        },
+        {
+          "name": "Booking Details",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/bookings/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["bookings", "{{bookingId}}"] }
+          }
+        },
+        {
+          "name": "Booking by PNR",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/bookings/pnr/PNR4K7X2M9QA", "host": ["{{baseUrl}}"], "path": ["bookings", "pnr", "PNR4K7X2M9QA"] }
+          }
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "PUT",
+            "url": { "raw": "{{baseUrl}}/bookings/{{bookingId}}/cancel", "host": ["{{baseUrl}}"], "path": ["bookings", "{{bookingId}}", "cancel"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Passengers",
+      "item": [
+        {
+          "name": "Passengers of Booking",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/passengers/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["passengers", "{{bookingId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Make Payment (demo)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/payments", "host": ["{{baseUrl}}"], "path": ["payments"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": 1,\n  \"paymentMethod\": \"UPI\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Payment of Booking",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/payments/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["payments", "{{bookingId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Dashboard",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["admin", "dashboard"] }
+          }
+        },
+        {
+          "name": "All Users",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin", "users"] }
+          }
+        },
+        {
+          "name": "All Bookings",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/admin/bookings", "host": ["{{baseUrl}}"], "path": ["admin", "bookings"] }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/admin/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["admin", "users", "{{userId}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}

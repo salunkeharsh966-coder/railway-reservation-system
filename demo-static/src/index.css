@@ -1,0 +1,119 @@
+/* Global styles for the Railway Reservation System */
+
+:root {
+  --railway-primary: #0b3d91;
+  --railway-accent: #f5a623;
+  --railway-dark: #072a63;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f4f6fa;
+  color: #1f2937;
+}
+
+.navbar-railway {
+  background: linear-gradient(90deg, var(--railway-dark), var(--railway-primary));
+}
+
+.navbar-railway .navbar-brand,
+.navbar-railway .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar-railway .nav-link:hover {
+  color: var(--railway-accent) !important;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--railway-primary), #1e6fd9);
+  color: #fff;
+  border-radius: 0.75rem;
+}
+
+.card-train {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.6rem;
+  transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+.card-train:hover {
+  box-shadow: 0 0.5rem 1.25rem rgba(11, 61, 145, 0.15);
+  transform: translateY(-2px);
+}
+
+.ticket {
+  border: 2px dashed var(--railway-primary);
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.ticket-header {
+  background: var(--railway-primary);
+  color: #fff;
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.pnr-badge {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.stat-card {
+  border: none;
+  border-radius: 0.6rem;
+  color: #fff;
+}
+
+.stat-card .stat-value {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.footer-railway {
+  background: var(--railway-dark);
+  color: #cbd5e1;
+}
+
+.footer-railway a {
+  color: var(--railway-accent);
+  text-decoration: none;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
+
+/* ---------------------------------------------------------------- demo banner */
+.demo-banner {
+  background: linear-gradient(90deg, #1f2937 0%, #374151 100%);
+  color: #f9fafb;
+  border-bottom: 2px solid #f59e0b;
+}
+.demo-banner .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #f9fafb;
+}
+.demo-banner .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+.demo-panel {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  line-height: 1.55;
+}
+.demo-panel code {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fde68a;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
